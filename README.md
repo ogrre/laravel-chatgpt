@@ -1,9 +1,7 @@
 # Laravel Chat 🐈 for ChatGPT
 
 [![Version](https://img.shields.io/packagist/v/ogrre/laravel-chatgpt.svg?style=flat-square)](https://packagist.org/packages/ogrre/laravel-chatgpt)
-[![Licence](https://img.shields.io/github/license/ogrre/laravel-chatgpt.svg?style=flat-square)](https://github.com/ogrre/laravel-chatgpt/blob/master/LICENSE)
-[![Tests](https://img.shields.io/github/workflow/status/votre-nom/librairie/Tests?label=tests&style=flat-square)](https://github.com/votre-nom/librairie/actions/workflows/tests.yml)
-[![Couverture](https://img.shields.io/codecov/c/github/votre-nom/librairie?style=flat-square)](https://codecov.io/gh/votre-nom/librairie)
+[![Licence](https://img.shields.io/github/license/0grre/laravel-chatgpt.svg?style=flat-square)](https://github.com/0grre/laravel-chatgpt/blob/main/LICENCE)
 
 ### Documentation
 
