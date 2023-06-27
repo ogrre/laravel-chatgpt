@@ -3,29 +3,50 @@
 namespace Ogrre\ChatGPT\Traits;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Ogrre\ChatGPT\Resources\ChatResource;
+use Ogrre\ChatGPT\ChatRegistrar;
+use Ogrre\ChatGPT\Models\Message;
 use Ogrre\ChatGPT\Models\Chat;
 
 trait HasChat
 {
     /**
-     * @return HasMany
+     * @return MorphToMany
      */
-    public function chats(): HasMany
+    public function chats(): MorphToMany
     {
-        return $this->hasMany(Chat::class);
+        return $this->morphToMany(Chat::class, "model", "model_has_chats");
+    }
+
+    /**
+     * @return Chat
+     */
+    public function newChat(string $title = null, string $role = null): Chat
+    {
+        $chat = Chat::create(["title" => $title ?? "New Chat"]);
+        $this->chats()->syncWithoutDetaching($chat);
+
+        $first_message = new Message();
+        $first_message->fill([
+            "role" => "system",
+            "content" => $role ?? "You are a helpful assistant"
+        ]);
+
+        $chat->messages()->save($first_message);
+
+        return $chat;
     }
 
     /**
      * @param string $prompt
-     * @param $chat_id
-     * @return Chat
+     * @param Chat $chat
+     * @return ChatResource
      */
-    public function chat(string $prompt, $chat_id = null): Chat
+    public function chatgpt(string $prompt, Chat $chat)
     {
-        $chat = $chat_id ? Chat::find($chat_id) : new Chat();
+        $chat->gpt($prompt);
 
-        $this->chats()->attach([$chat->id]);
-
-        return $chat->send($prompt);
+        return $chat->display();
     }
 }

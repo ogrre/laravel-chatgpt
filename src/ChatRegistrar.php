@@ -10,7 +10,7 @@ class ChatRegistrar
 
     public function __construct(){
 
-        $this->chatClass = config('chat.models.chat');
+        $this->chatClass = config('chatgpt.models.chat');
     }
 
     /**

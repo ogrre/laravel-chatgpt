@@ -4,6 +4,7 @@ namespace Ogrre\ChatGPT\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Ogrre\ChatGPT\Resources\ChatResource;
 
 use OpenAI;
 
@@ -14,7 +15,7 @@ class Chat extends Model
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->client = OpenAI::client(config('openai.api_key'));
+        $this->client = OpenAI::client(config('chatgpt.secrets.api_key'));
     }
 
     /**
@@ -22,6 +23,8 @@ class Chat extends Model
      */
     protected $fillable = [
         'id',
+        'title',
+        'messages'
     ];
 
     /**
@@ -38,33 +41,54 @@ class Chat extends Model
     }
 
     /**
-     * @param string $prompt
-     * @return $this
+     * @return mixed
      */
-    public function send(string $prompt): static
+    public function list_messages()
     {
+        return $this->messages->map(function($message) {
+            return ['role' => $message->role, 'content' => $message->content];
+        })->all();
+    }
+
+    /**
+     * @param string $content
+     * @param string $role
+     * @return void
+     */
+    private function newMessage(string $content, string $role){
         $messages = $this->messages();
 
-        $user_message = new Message();
-        $user_message->fill([
-            "role" => "user",
-            "content" => $prompt,
+        $message = new Message();
+        $message->fill([
+            "role" => $role,
+            "content" => $content,
         ]);
-        $messages->save($user_message);
+        $messages->save($message);
+    }
+
+    /**
+     * @return array
+     */
+    public function display()
+    {
+        return ["chat" => Chat::find($this->id), "messages" => Chat::find($this->id)->messages];
+    }
+
+    /**
+     * @param string $prompt
+     * @return array
+     */
+    public function gpt(string $prompt)
+    {
+        $this->newMessage($prompt, "user");
 
         $response = $this->client->chat()->create([
             'model' => 'gpt-3.5-turbo',
-            'messages' => $messages,
+            'messages' => $this->list_messages(),
         ]);
 
-        $assistant_message = new Message();
-        $assistant_message->fill([
-            "role" => "assistant",
-            "content" => $response->choices[0]->message->content,
+        $this->newMessage($response->choices[0]->message->content, "assistant");
 
-        ]);
-        $messages->save($assistant_message);
-
-        return $this;
+        return self::display();
     }
 }
