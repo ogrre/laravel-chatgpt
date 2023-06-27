@@ -89,6 +89,27 @@ class Chat extends Model
 
         $this->newMessage($response->choices[0]->message->content, "assistant");
 
+        $this->title = self::title($prompt);
+        $this->save();
+
         return self::display();
+    }
+
+    /**
+     * @param string $prompt
+     * @return string|null
+     */
+    private function title(string $prompt)
+    {
+        $content = "Résume ce prompt en quelaues mots pour en faire un titre: " . $prompt;
+
+        $response = $this->client->chat()->create([
+            'model' => 'gpt-3.5-turbo',
+            'messages' => [
+                ['role' => 'user', 'content' => $content],
+            ],
+        ]);
+
+        return $response->choices[0]->message->content;
     }
 }
