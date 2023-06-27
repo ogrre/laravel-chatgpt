@@ -17,7 +17,7 @@ class ChatServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/chat.php', 'chat'
+            __DIR__.'/../config/chatgpt.php', 'chat'
         );
     }
 
@@ -34,7 +34,7 @@ class ChatServiceProvider extends ServiceProvider
         });
 
         $this->publishes([
-            __DIR__.'/../config/chat.php' => config_path('chat.php'),
+            __DIR__.'/../config/chatgpt.php' => config_path('chatgpt.php'),
         ], 'config');
 
         $this->publishes([
