@@ -45,7 +45,7 @@ class Chat extends Model
      */
     public function list_messages()
     {
-        return $this->messages->map(function($message) {
+        return $this->messages->map(function ($message) {
             return ['role' => $message->role, 'content' => $message->content];
         })->all();
     }
@@ -55,7 +55,8 @@ class Chat extends Model
      * @param string $role
      * @return void
      */
-    private function newMessage(string $content, string $role){
+    private function newMessage(string $content, string $role)
+    {
         $messages = $this->messages();
 
         $message = new Message();
@@ -89,27 +90,28 @@ class Chat extends Model
 
         $this->newMessage($response->choices[0]->message->content, "assistant");
 
-        $this->title = self::title($prompt);
-        $this->save();
+        self::title($prompt);
 
         return self::display();
     }
 
     /**
      * @param string $prompt
-     * @return string|null
      */
     private function title(string $prompt)
     {
-        $content = "Résume ce prompt en quelaues mots pour en faire un titre: " . $prompt;
+        if (sizeof($this->messages) < 4 and $this->title == 'New Chat') {
+            $content = "Résume ce prompt en quelques mots pour en faire un titre: " . $prompt;
 
-        $response = $this->client->chat()->create([
-            'model' => 'gpt-3.5-turbo',
-            'messages' => [
-                ['role' => 'user', 'content' => $content],
-            ],
-        ]);
+            $response = $this->client->chat()->create([
+                'model' => 'gpt-3.5-turbo',
+                'messages' => [
+                    ['role' => 'user', 'content' => $content],
+                ],
+            ]);
 
-        return $response->choices[0]->message->content;
+            $this->title = $response->choices[0]->message->content;
+            $this->save();
+        }
     }
 }
