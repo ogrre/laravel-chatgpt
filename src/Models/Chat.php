@@ -84,7 +84,7 @@ class Chat extends Model
         $this->newMessage($prompt, "user");
 
         $response = $this->client->chat()->create([
-            'model' => 'gpt-3.5-turbo',
+            'model' => config('chatgpt.openai.model'),
             'messages' => $this->list_messages(),
         ]);
 
@@ -104,7 +104,7 @@ class Chat extends Model
             $content = "Résume ce prompt en quelques mots pour en faire un titre: " . $prompt;
 
             $response = $this->client->chat()->create([
-                'model' => 'gpt-3.5-turbo',
+                'model' => config('chatgpt.openai.model'),
                 'messages' => [
                     ['role' => 'user', 'content' => $content],
                 ],
