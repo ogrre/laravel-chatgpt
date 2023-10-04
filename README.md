@@ -12,6 +12,7 @@ This libray need openai php client, so don't forget to add in your .env this var
 
 OPENAI_API_KEY=
 OPENAI_API_ORGANIZATION=
+OPENAI_MODEL=gpt-4
 ```
 
 #### Installation:
