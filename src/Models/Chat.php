@@ -101,7 +101,7 @@ class Chat extends Model
     private function title(string $prompt)
     {
         if (sizeof($this->messages) < 4 and $this->title == 'New Chat') {
-            $content = "Résume ce prompt en quelques mots: " . $prompt;
+            $content = "Résume ce texte en quelques mots: " . $prompt;
 
             $response = $this->client->chat()->create([
                 'model' => config('chatgpt.openai.model'),
