@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/packagist/v/ogrre/laravel-chatgpt.svg?style=flat-square)](https://packagist.org/packages/ogrre/laravel-chatgpt)
 [![Licence](https://img.shields.io/github/license/0grre/laravel-chatgpt.svg?style=flat-square)](https://github.com/0grre/laravel-chatgpt/blob/main/LICENCE)
 
-### Documentation
+## Documentation
 
 This libray need openai php client, so don't forget to add in your .env this variables:
 
@@ -15,7 +15,7 @@ OPENAI_API_ORGANIZATION=
 OPENAI_MODEL=gpt-4
 ```
 
-#### Installation:
+## Installation:
 
 To install the Laravel Chat for ChatGPT library, run the following command:
 
@@ -46,7 +46,7 @@ Finally, run the migration command to create the necessary database tables:
 php artisan migrate
 ```
 
-#### Usage instructions
+## Usage instructions
 
 To associate a chat with a model, the model must use the `hasChat` trait. For example, in the User model:
 
@@ -83,5 +83,5 @@ The Chat model is a standard Laravel Model, so you can use all the usual functio
 
 Additionally, the library provides a ChatResource for displaying chats in an API, allowing for easy integration with API endpoints.
 
-## Support me
+# Support me
 <a href="https://www.buymeacoffee.com/0grre" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
