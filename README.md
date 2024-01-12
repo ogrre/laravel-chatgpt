@@ -36,7 +36,7 @@ By default, the service provider will be automatically registered in the `app.ph
 
 'providers' => [
     // ...
-    Ogrre\Media\MediaServiceProvider::class,
+    Ogrre\ChatGPT\ChatServiceProvider,
 ];
 ```
 
