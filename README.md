@@ -83,5 +83,5 @@ The Chat model is a standard Laravel Model, so you can use all the usual functio
 
 Additionally, the library provides a ChatResource for displaying chats in an API, allowing for easy integration with API endpoints.
 
-### Support me
+## Support me
 <a href="https://www.buymeacoffee.com/0grre" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
