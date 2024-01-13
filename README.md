@@ -1,7 +1,8 @@
 # Laravel Chat 🐈 for ChatGPT
 
-[![Version](https://img.shields.io/packagist/v/ogrre/laravel-chatgpt.svg?style=flat-square)](https://packagist.org/packages/ogrre/laravel-chatgpt)
-[![Licence](https://img.shields.io/github/license/0grre/laravel-chatgpt.svg?style=flat-square)](https://github.com/0grre/laravel-chatgpt/blob/main/LICENCE)
+![Packagist Version](https://img.shields.io/packagist/v/ogrre/laravel-chatgpt)
+![GitHub License](https://img.shields.io/github/license/0grre/laravel-chatgpt)
+![Packagist Downloads](https://img.shields.io/packagist/dt/ogrre/laravel-chatgpt)
 
 ## Documentation
 
@@ -82,6 +83,9 @@ $user->chatgpt("say hello in French", $chat);
 The Chat model is a standard Laravel Model, so you can use all the usual functions, including delete and others.
 
 Additionally, the library provides a ChatResource for displaying chats in an API, allowing for easy integration with API endpoints.
+
+# Contributing
+Contributions are welcome and will be fully credited. I accept contributions via Pull Requests on Github.
 
 # Support me
 <a href="https://www.buymeacoffee.com/0grre" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
