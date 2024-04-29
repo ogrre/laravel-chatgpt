@@ -1,4 +1,4 @@
-# Laravel Chat 🐈 for ChatGPT
+# 🐈 Laravel Chat for ChatGPT
 
 ![Packagist Version](https://img.shields.io/packagist/v/ogrre/laravel-chatgpt)
 ![GitHub License](https://img.shields.io/github/license/0grre/laravel-chatgpt)
